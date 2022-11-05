@@ -1,22 +1,20 @@
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-        visitedCol = defaultdict(set)
-        visitedRow = defaultdict(set)
-        visitedMatrix = defaultdict(set)
+        row = set()
+        col = set()
+        matrix = set()
         
-        for col in range(9):
-            for row in range(9):
-                if board[col][row] == ".":
+        for r in range(9):
+            for c in range(9):
+                if board[r][c] == ".":
                     continue
                     
-                if (board[col][row] in visitedCol[col] or
-                   board[col][row] in visitedRow[row] or
-                   board[col][row] in visitedMatrix[(col//3,row//3)]):
+                if ((r,board[r][c]) in row or 
+                    (c,board[r][c]) in col or
+                    ((r//3,c//3), board[r][c])  in matrix):
                     return False
                 
-                visitedCol[col].add(board[col][row])
-                visitedRow[row].add(board[col][row])
-                visitedMatrix[(col//3, row//3)].add(board[col][row])
-                
+                row.add((r, board[r][c]))
+                col.add((c, board[r][c]))
+                matrix.add( ((r//3, c//3), board[r][c]) )
         return True
-        
