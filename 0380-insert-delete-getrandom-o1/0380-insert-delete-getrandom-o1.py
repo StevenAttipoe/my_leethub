@@ -1,14 +1,14 @@
 class RandomizedSet:
 
     def __init__(self):
-        self.nums = {}
+        self.numsMap = {}
         self.numsList = []
 
     def insert(self, val: int) -> bool:
-        isAbsent =  val not in self.nums
+        isAbsent =  val not in self.numsMap
 
         if isAbsent:
-            self.nums[val] = len(self.numsList)
+            self.numsMap[val] = len(self.numsList)
             self.numsList.append(val)
             return True
         
@@ -16,15 +16,15 @@ class RandomizedSet:
         
 
     def remove(self, val: int) -> bool:
-        isPresent =  val in self.nums
+        isPresent =  val in self.numsMap
         
         if isPresent:
-            idx = self.nums[val]
+            idx = self.numsMap[val]
             lastNum = self.numsList[-1]
             self.numsList[idx] = lastNum
             self.numsList.pop()
-            self.nums[lastNum] = idx
-            del self.nums[val]
+            self.numsMap[lastNum] = idx
+            del self.numsMap[val]
             return True
         
         return False
