@@ -31,7 +31,7 @@ class RandomizedSet:
         
 
     def getRandom(self) -> int:
-        return self.numsList[random.randint(0, len(self.nums) - 1)]
+        return self.numsList[random.randint(0, len(self.numsList) - 1)]
 
         
 
