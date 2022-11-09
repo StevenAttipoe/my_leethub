@@ -10,13 +10,13 @@ class Solution:
         
         while list1 or list2:
             if not list1:
-                dummy.next = ListNode(list2.val)
+                dummy.next = list2
                 dummy = dummy.next
                 list2 = list2.next
                 continue
                 
             if not list2:
-                dummy.next = ListNode(list1.val)
+                dummy.next = list1
                 dummy = dummy.next
                 list1 = list1.next
                 continue
