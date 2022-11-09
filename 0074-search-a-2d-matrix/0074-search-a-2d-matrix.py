@@ -17,8 +17,11 @@ class Solution:
                 
             else:
                 break
-              
-       
+                
+        #Find if target is not in any of the rows
+        if not top <= bot:
+            return False
+        
         left, right = 0, COL - 1    
         while left <= right:
             mid = (left + right) // 2
