@@ -1,24 +1,24 @@
 class Solution:
     #O(log(max(P))*P)
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
-        k = float("inf")
-        
         left, right = 1, max(piles)
+        minK = max(piles)
+        
         while left<=right:
-            mid = (left + right) // 2
-            currTime = 0
+            k = (left + right) // 2
+            hours = 0
             for num in piles:
-                if mid >= num:
-                    currTime += 1
+                if k >= num:
+                    hours += 1
                 else:
-                    currTime += math.ceil(num/mid)
+                    hours += math.ceil(num/k)
 
-            if currTime <= h:
-                k = min(k,mid)
-                right = mid - 1
+            if hours <= h:
+                minK = min(minK,k)
+                right = k - 1
                 
             else:
-                left = mid + 1
+                left = k + 1
             
-        return k
+        return minK
             
