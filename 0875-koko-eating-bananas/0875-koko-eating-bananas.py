@@ -1,4 +1,5 @@
 class Solution:
+    #O(log(max(P))*P)
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
         k = float("inf")
         
