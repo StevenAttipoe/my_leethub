@@ -4,20 +4,20 @@ class Solution:
         nameToTranses = defaultdict(list)
 
         for t in transactions:
-          name, time, amount, city = t.split(',')
-          time, amount = int(time), int(amount)
-          nameToTranses[name].append({'time': time, 'city': city})
+            name, time, amount, city = t.split(',')
+            time, amount = int(time), int(amount)
+            nameToTranses[name].append({'time': time, 'city': city})
 
         for t in transactions:
-          name, time, amount, city = t.split(',')
-          time, amount = int(time), int(amount)
-          if amount > 1000:
-            ans.append(t)
-          elif name in nameToTranses:
-            for sameName in nameToTranses[name]:
-              if abs(sameName['time'] - time) <= 60 and sameName['city'] != city:
+            name, time, amount, city = t.split(',')
+            time, amount = int(time), int(amount)
+            if amount > 1000:
                 ans.append(t)
-                break
+            elif name in nameToTranses:
+                for sameName in nameToTranses[name]:
+                    if abs(sameName['time'] - time) <= 60 and sameName['city'] != city:
+                        ans.append(t)
+                        break
 
         return ans
         
