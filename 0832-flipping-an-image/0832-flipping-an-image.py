@@ -4,16 +4,12 @@ class Solution:
             return []
         
         ROW, COL = len(image), len(image[0])
-        flippedImage = []
         
-        for i in range(ROW):
-            flippedRow = []
-            for j in range(COL - 1, -1, -1):
-                if image[i][j] == 0:
-                    flippedRow.append(1)
-                else:
-                    flippedRow.append(0)
-            flippedImage.append(flippedRow)
-            
-        return flippedImage
+        for r in range(ROW):
+            i, j = 0 , COL - 1
+            while i <= j:
+                image[r][i], image[r][j] = image[r][j]^1, image[r][i]^1 
+                i += 1
+                j -= 1
+        return image
         
