@@ -5,20 +5,17 @@
 #         self.left = left
 #         self.right = right
 class BSTIterator:
-
-    def __init__(self, root: Optional[TreeNode]):
+    def __init__(self, root):
         self.stack = []
-        while root:
-            self.stack.append(root)
-            root = root.left
-        
+        def inOrderTraversal(root):
+            if root:
+                inOrderTraversal(root.right)
+                self.stack.append(root.val)
+                inOrderTraversal(root.left)
+        inOrderTraversal(root)
+
     def next(self) -> int:
-        res = self.stack.pop()
-        cur = res.right
-        while cur:
-            self.stack.append(cur)
-            cur = cur.left
-        return res.val
+        return self.stack.pop()
 
     def hasNext(self) -> bool:
         return self.stack != []
