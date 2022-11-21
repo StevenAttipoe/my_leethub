@@ -1,23 +1,19 @@
 class Solution:
     def isHappy(self, n: int) -> bool:
-        nums = []
-        _sum = 0
-        seen = set()
-
-        while _sum != 1:
+        
+        def getNext(n):
+            totalSum = 0
             while n != 0:
-                nums.append(n % 10)
+                lasNum = n % 10
                 n = n // 10
-
-            for i in range(len(nums)):
-                nums[i] = nums[i]**2
-
-            _sum = sum(nums)
-            if _sum in seen:
-                return False
-            n = _sum
-            nums  = []
-            seen.add(_sum)
-        return True
+                totalSum += lasNum ** 2
+            return totalSum
+        
+        seen = set()
+        while n != 1 and n not in seen:
+            seen.add(n)
+            n = getNext(n)
+            
+        return n == 1
             
             
