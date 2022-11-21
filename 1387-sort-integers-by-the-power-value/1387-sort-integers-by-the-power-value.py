@@ -10,13 +10,19 @@ class Solution:
         return res[k-1][0]
         
         
-    def getSteps(self,num):
+    def getSteps(self,num, memo = {1:0}):
         steps = 0
         while (num != 1 and num > 0):
-            if num % 2 == 0:
+            old = num
+            if num in memo:
+                num = memo[num]
+                steps += 1
+                continue
+            elif num % 2 == 0:
                 num = num // 2
-            elif num % 2 != 0:
+            else:
                 num = 3 * num + 1
+            memo[old] = num
             steps += 1
         return steps
         
