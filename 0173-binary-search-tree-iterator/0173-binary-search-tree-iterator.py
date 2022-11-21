@@ -7,15 +7,17 @@
 class BSTIterator:
     def __init__(self, root):
         self.stack = []
-        def inOrderTraversal(root):
-            if root:
-                inOrderTraversal(root.right)
-                self.stack.append(root.val)
-                inOrderTraversal(root.left)
-        inOrderTraversal(root)
-
+        while root:
+            self.stack.append(root)
+            root = root.left
+            
     def next(self) -> int:
-        return self.stack.pop()
+        res = self.stack.pop()
+        cur = res.right
+        while cur:
+            self.stack.append(cur)
+            cur = cur.left
+        return res.val
 
     def hasNext(self) -> bool:
         return self.stack != []
