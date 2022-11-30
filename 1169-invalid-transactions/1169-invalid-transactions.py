@@ -1,35 +1,33 @@
-class Solution:   
-    class Transaction:
-        def __init__(self, data):
-            self.name = data[0]
-            self.time = int(data[1])
-            self.amount = int(data[2])
-            self.city = data[3]
-            
-        def toString(self):
-            return self.name + "," + str(self.time) + "," + str(self.amount) + "," +self.city
-            
+class Solution: 
     def invalidTransactions(self, transactions: List[str]) -> List[str]:
-        transMap = {}
-        res = []
-        for transaction in transactions:
-            currTrans = Solution.Transaction(transaction.split(","))
-            if currTrans.name in transMap:
-                transMap[currTrans.name].append(currTrans)
+        transactionMap = {}
+        for trans in transactions:
+            name, time, amount, city = trans.split(",")
+            time = int(time)
+            if time in transactionMap:
+                if name in transactionMap[time]:
+                    transactionMap[time][name].append(city)
+                else:
+                    transactionMap[time][name] = [city]
             else:
-                transMap[currTrans.name] = [currTrans]
-
-        for transaction in transactions:
-            currTrans = Solution.Transaction(transaction.split(","))
-            if currTrans.amount > 1000:
-                res.append(currTrans.toString())
-                continue
-                
-            if currTrans.name in transMap:
-                for prevTrans in transMap[currTrans.name]:
-                    if currTrans.city != prevTrans.city and abs(currTrans.time - prevTrans.time) <= 60:
-                        res.append(currTrans.toString())
-                        break
-        return res
-  
+                transactionMap[time] = {name:[city]}
         
+        invalidTrans = []
+        for trans in transactions:
+            name, time, amount, city = trans.split(",")
+            if int(amount) > 1000:
+                invalidTrans.append(trans)
+                continue
+
+            for time in range(int(time)-60, int(time)+61):
+                if time not in transactionMap:
+                    continue
+                if name not in transactionMap[time]:
+                    continue
+                if len(transactionMap[time][name]) > 1 or transactionMap[time][name][0] != city:
+                    invalidTrans.append(trans)
+                    break
+
+        return invalidTrans
+
+            
