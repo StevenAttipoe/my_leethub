@@ -1,23 +1,31 @@
 class Solution:
     def knightDialer(self, n: int) -> int:
-        neighbors = {
-            0:(4,6),
-            1:(6,8),
-            2:(7,9),
-            3:(4,8),
-            4:(0,3,9),
-            5:(),
-            6:(0,1,7),
-            7:(2,6),
-            8:(1,3),
-            9:(2,4)
-        }
-        current_counts = [1] * 10
-        for _ in range(n-1):
-            next_counts = [0] * 10
-            for src_key in range(10):
-                for dst_key in neighbors[src_key]:
-                    next_counts[dst_key] = (next_counts[dst_key] + current_counts[src_key]) % (10**9 + 7)
-            current_counts = next_counts
-        return sum(current_counts) % (10**9 + 7)
-        
+        DIALS = {
+            -1: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+            0:[4, 6], 
+            1: [6, 8], 
+            2: [7, 9], 
+            3: [4, 8], 
+            4: [0, 3, 9], 
+            5: [] ,
+            6: [0, 1, 7], 
+            7: [2, 6],
+            8: [1, 3],
+            9: [2, 4]
+            }
+
+        return self.knightDialerHelper(DIALS, n, -1, {})
+
+    def knightDialerHelper(self, dials, idx, cur, cache):
+        if (idx, cur) in cache:
+            return cache[(idx, cur)]
+
+        if idx == 0:
+            return 1
+
+        count = 0
+        for num in dials[cur]:
+            count += self.knightDialerHelper(dials, idx - 1, num, cache)
+
+        cache[(idx, cur)] = count
+        return count % (10 ** 9 + 7)
