@@ -1,7 +1,6 @@
 class Solution:
     def knightDialer(self, n: int) -> int:
         DIALS = {
-            -1: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
             0:[4, 6], 
             1: [6, 8], 
             2: [7, 9], 
@@ -14,18 +13,12 @@ class Solution:
             9: [2, 4]
             }
 
-        return self.knightDialerHelper(DIALS, n, -1, {})
+        counts = [1] * 10
+        for _ in range(n-1):
+            curCount = [0] * 10
+            for src in range(10):
+                for des in DIALS[src]:
+                    curCount[des] +=  counts[src] % (10 ** 9 + 7)
+            counts = curCount
 
-    def knightDialerHelper(self, dials, idx, cur, cache):
-        if (idx, cur) in cache:
-            return cache[(idx, cur)]
-
-        if idx == 0:
-            return 1
-
-        count = 0
-        for num in dials[cur]:
-            count += self.knightDialerHelper(dials, idx - 1, num, cache)
-
-        cache[(idx, cur)] = count
-        return count % (10 ** 9 + 7)
+        return sum(counts) % (10 ** 9 + 7)
