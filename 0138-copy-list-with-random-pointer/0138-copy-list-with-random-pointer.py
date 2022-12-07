@@ -9,20 +9,37 @@ class Node:
 
 class Solution:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
-        cur = head
-        nodeToCopy = {None: None}
-        
-        while cur:
-            nodeToCopy[cur] = Node(cur.val)
-            cur = cur.next
+        if not head:
+            return head
             
+        #Sandwich copyNodes betweent oldNodes
         cur = head
         while cur:
-            copy = nodeToCopy[cur]
-            copy.next = nodeToCopy[cur.next]
-            copy.random = nodeToCopy[cur.random]
-            cur = cur.next
-            
-        return nodeToCopy[head]
-            
-        
+            copy = Node(cur.val)
+            copy.next = cur.next
+            cur.next = copy
+            cur = copy.next
+
+        #Set random pointers for copy nodes
+        cur = head
+        while cur:
+            if cur.random:
+                cur.next.random = cur.random.next
+            else:
+                cur.next.random = None
+            cur = cur.next.next
+
+        #Unweave list
+        oldList = head
+        newList = head.next
+        newHead = head.next
+        while oldList:
+            oldList.next = oldList.next.next
+            if newList.next:
+                newList.next = newList.next.next
+            else:
+                 newList.next = None
+            oldList = oldList.next
+            newList = newList.next
+
+        return newHead
