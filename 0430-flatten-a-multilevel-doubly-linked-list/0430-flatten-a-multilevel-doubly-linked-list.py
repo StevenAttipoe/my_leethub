@@ -13,23 +13,24 @@ class Solution:
         if not head:
             return head
         
-        dummy = Node(0)
-        curr, stack = dummy, [head]
-        
+        stack = [head]
         while stack:
-            topNode = stack.pop()
+            node = stack.pop()
             
-            if topNode.next:
-                stack.append(topNode.next)
+            if node.next:
+                stack.append(node.next)
                 
-            if topNode.child:
-                stack.append(topNode.child)
+            if node.child:
+                stack.append(node.child)
+                node.next = node.child
+                node.next.prev = node
+                node.child = None
+                node = node.next
+            else:
+                if not node.next and stack:
+                    node.next = stack[-1]
+                    node.next.prev = node
+                    node.child = None
+                node = node.next
                 
-            curr.next = topNode
-            topNode.prev = curr
-            topNode.child = None
-            curr = topNode
-            
-        dummy.next.prev = None
-        return dummy.next
-            
+        return head
