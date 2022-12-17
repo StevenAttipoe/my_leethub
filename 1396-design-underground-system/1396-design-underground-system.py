@@ -9,7 +9,7 @@ class UndergroundSystem:
 
     def checkOut(self, id: int, stationName: str, t: int) -> None:
         startStation , startTime = self.timesheet[id]
-        del  self.timesheet[id]
+        self.timesheet.pop(id)
         
         if (startStation,stationName) in self.stats:
             self.stats[(startStation,stationName)][0] += 1
