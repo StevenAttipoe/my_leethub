@@ -7,12 +7,14 @@ class Solution:
  
         dividend, divisor = abs(dividend), abs(divisor)
     
-        result = len(range(divisor, dividend+1, divisor))
+        res = len(range(divisor, dividend+1, divisor))
         
         if sign == -1:
-            result = -result
+            res = -res
             
-        minus_limit = -(2**31)
-        plus_limit = (2**31 - 1)
-        result = min(max(result, minus_limit), plus_limit)
-        return result
+        if res > (2 ** 31) -1:
+            return (2 ** 31) -1
+        elif res < (-2 ** 31):
+            return (-2 ** 31)
+        else:
+            return res
