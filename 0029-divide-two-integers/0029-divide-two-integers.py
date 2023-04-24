@@ -1,0 +1,18 @@
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        sign = 1
+        
+        if (dividend >= 0 and divisor < 0) or (dividend < 0 and divisor >= 0):
+            sign = -1 
+ 
+        dividend, divisor = abs(dividend), abs(divisor)
+    
+        result = len(range(divisor, dividend+1, divisor))
+        
+        if sign == -1:
+            result = -result
+            
+        minus_limit = -(2**31)
+        plus_limit = (2**31 - 1)
+        result = min(max(result, minus_limit), plus_limit)
+        return result
