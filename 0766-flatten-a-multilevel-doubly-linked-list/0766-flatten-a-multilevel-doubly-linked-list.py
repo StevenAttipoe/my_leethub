@@ -17,8 +17,6 @@ class Solution:
 
         while stack:
             node = stack.pop()
-            if not node:
-                break
 
             if node.next:
                 stack.append(node.next)
@@ -32,7 +30,8 @@ class Solution:
                 stack.append(node.child)
                 node.next = node.child
                 node.child.prev = node
-                node.child = None                
+                node.child = None
+                node = node.next                
 
         return head
         
