@@ -14,7 +14,6 @@ class Solution:
             return head
 
         stack = [head]
-
         while stack:
             node = stack.pop()
 
