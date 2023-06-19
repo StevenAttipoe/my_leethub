@@ -31,7 +31,6 @@ class Solution:
                 node.next = node.child
                 node.child.prev = node
                 node.child = None
-                node = node.next                
 
         return head
         
