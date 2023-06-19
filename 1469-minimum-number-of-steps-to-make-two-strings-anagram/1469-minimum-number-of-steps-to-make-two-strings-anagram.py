@@ -1,16 +1,11 @@
 class Solution:
     def minSteps(self, s: str, t: str) -> int:
-        charFreq = Counter(s)
-        steps = 0
+        freq = [0] * 26
+
+        for char in s:
+            freq[ord(char) - ord('a')] += 1
 
         for char in t:
-            if char in charFreq:
-                charFreq[char] -= 1
+            freq[ord(char) - ord('a')] -= 1
 
-                if not charFreq[char]:
-                    del charFreq[char]
-            
-            else:
-                steps += 1
-
-        return steps
+        return sum(val for val in freq if val > 0)
