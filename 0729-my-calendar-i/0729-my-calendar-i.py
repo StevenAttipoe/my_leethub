@@ -5,10 +5,10 @@ class MyCalendar:
         self.calendar = SortedList()
         
     def book(self, start: int, end: int) -> bool:
-        rightMostIndex = self.calendar.bisect_right((start, end))
+        indexToInsert = self.calendar.bisect_right((start, end))
         
-        if ((rightMostIndex > 0 and self.calendar[rightMostIndex - 1][1] > start) or 
-            (rightMostIndex < len(self.calendar) and self.calendar[rightMostIndex][0] < end)):
+        if ((indexToInsert > 0 and self.calendar[indexToInsert - 1][1] > start) or 
+            (indexToInsert < len(self.calendar) and self.calendar[indexToInsert][0] < end)):
                 return False
 
         self.calendar.add((start, end))
