@@ -1,13 +1,12 @@
 class Solution:
     def firstUniqChar(self, s: str) -> int:
+        freq = [0] * 26
+
+        for char in s:
+            freq[ord(char) - ord('a')] += 1
+
         for i in range(len(s)):
-            char = s[i]
-            isUnique = True
-            for j in range(len(s)):
-                if i != j and char == s[j]:
-                    isUnique = False
-                    break
-            if isUnique:
+            if freq[ord(s[i]) - ord('a')] == 1:
                 return i
         return -1
 
