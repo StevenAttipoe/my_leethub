@@ -6,4 +6,4 @@ class Solution:
             if s1[i] != s2[i]:
                 swaps += 1
 
-        return s1 == s2 or sorted(s1) == sorted(s2) and swaps == 2
+        return Counter(s1) == Counter(s2) and (swaps == 0 or swaps == 2)
