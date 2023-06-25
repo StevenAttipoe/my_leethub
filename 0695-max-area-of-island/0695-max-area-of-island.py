@@ -6,7 +6,6 @@ class Solution:
             for j in range(len(grid[0])):
                 if grid[i][j] == 1:
                     area = self.getArea(i, j, grid)
-                    print(area)
                     maxArea = max(area, maxArea)
 
         return maxArea
