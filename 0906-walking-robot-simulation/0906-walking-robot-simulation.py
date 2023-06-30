@@ -1,29 +1,27 @@
 class Solution:
     def robotSim(self, commands: List[int], obstacles: List[List[int]]) -> int:
-        obstacle_set = { (a, b) for a, b in obstacles }
-        max_dist = 0
-
-        facing = (0, 1)
-        x, y = 0, 0
+        dy = [1, 0, -1, 0]
+        dx = [0, 1, 0, -1]
+        x = y = 0
+        di = 0
+        obstacleSet = { (a, b) for a, b in obstacles }
+        maxDistance = 0
 
         for value in commands:
-            if value == -2: #left
-                facing = (-facing[1], facing[0])
-            elif value == -1: #right
-                facing = (facing[1], -facing[0])
+            if value == -1:
+                di = (di + 1) % 4
+            elif value == -2:
+                di = (di - 1) % 4
             else:
-                for _ in range(value):
-                    nx = x + facing[0]
-                    ny = y + facing[1]
+                for k in range(value):
+                    if (x+dx[di], y+dy[di]) not in obstacleSet:
+                        x += dx[di]
+                        y += dy[di]
+                        distance = x**2 + y**2
+                        maxDistance = max(maxDistance, distance)
 
-                    if (nx, ny) in obstacle_set:
-                        break
-
-                    x, y = nx, ny
-            dist = x*x + y*y
-            max_dist = max(max_dist, dist)
+        return maxDistance
         
-        return max_dist
 
 
         
