@@ -9,9 +9,8 @@ class Solution:
         heap = []
 
         for i in range(len(lists)):
-            list_head = lists[i]
-            if list_head:
-                heapq.heappush(heap, (list_head.val, i, lists[i]))
+            if lists[i]:
+                heapq.heappush(heap, (lists[i].val, i, lists[i]))
 
         while heap:
             _, i, node = heapq.heappop(heap)
