@@ -12,33 +12,24 @@ class Solution:
 
         while stack:
             node, isDisjoint = stack.pop()
-            print(node.val, isDisjoint)
             if isDisjoint and node.val not in to_delete:
                 result.append(node)
 
             if node.val in to_delete:
                 isDisjoint = True
-            else: isDisjoint = False
+            else: 
+                isDisjoint = False
 
             if node.right:
                 stack.append([node.right, isDisjoint])
                 if node.right.val in to_delete:
-                    # stack[-1][1] = True
-                    # print(stack[-1][1])
                     node.right = None
-                # else:
-                #     if isDisjoint:
-                #         result.append(node.right)
 
             if node.left:
                 stack.append([node.left, isDisjoint])
                 if node.left.val in to_delete:
-                    # stack[-1][1] = True
                     node.left = None 
-                # else:
-                #     if isDisjoint:
-                #         result.append(node.left)
-
+                
         return result
 
 
