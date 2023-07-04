@@ -3,7 +3,7 @@ class Solution:
         heap = []
 
         for n in arr:
-            ones = bin(n).count("1")
+            ones = self.countOnes(n)
             heapq.heappush(heap, (ones, n))
 
         res = []
@@ -11,3 +11,10 @@ class Solution:
             ones, n = heapq.heappop(heap)
             res.append(n)
         return res
+
+    def countOnes(self, n):
+        count = 0
+        while n:
+            n &= n - 1
+            count += 1
+        return count
