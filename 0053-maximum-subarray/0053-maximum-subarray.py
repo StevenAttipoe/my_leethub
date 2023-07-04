@@ -1,5 +1,5 @@
 class Solution:
-    def maxSubArray(self, nums: List[int]) -> int:
+    def maxSubArray2(self, nums: List[int]) -> int:
         res = nums[0]
         runningSum = 0
         
@@ -11,7 +11,7 @@ class Solution:
                 
         return res
 
-    def maxSubArray2(self, nums):
+    def maxSubArray(self, nums):
         dp = [0]*len(nums)
         for i,num in enumerate(nums):            
             dp[i] = max(dp[i-1] + num, num)
