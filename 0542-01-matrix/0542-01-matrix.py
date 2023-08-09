@@ -11,9 +11,9 @@ class Solution:
                     mat[i][j] = '*'
 
         for r, c in queue:
-            for dr, dc in neighbours:
-                row = r + dr
-                col = c + dc
+            for nr, nc in neighbours:
+                row = r + nr
+                col = c + nc
                 if 0 <= row < len(mat) and 0 <= col < len(mat[0]) and mat[row][col] == '*':
                     mat[row][col] = mat[r][c] + 1
                     queue.append((row, col))
