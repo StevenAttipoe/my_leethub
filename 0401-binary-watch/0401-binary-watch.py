@@ -4,9 +4,6 @@ class Solution:
         res = []
 
         def backtrack(n, start, h, m):
-            # if n < 0:
-            #     return
-
             if n == 0 and h < 12 and m < 60:
                 res.append(f"{h}:{m:02}")
                 return
