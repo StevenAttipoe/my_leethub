@@ -5,13 +5,12 @@ class Solution:
 
         for i in range(len(nums)):
             for j in range(i+1, len(nums)):
-                # if i != j:
-                    two_sum = nums[i] + nums[j]
-                    pair = tuple(sorted((nums[i], nums[j])))
-                    if pair in sum_dic[two_sum]:
-                         sum_dic[two_sum][pair].append([i, j])
-                    else:
-                        sum_dic[two_sum][pair] = [[i, j]]
+                two_sum = nums[i] + nums[j]
+                pair = tuple(sorted((nums[i], nums[j])))
+                if pair in sum_dic[two_sum]:
+                        sum_dic[two_sum][pair].append([i, j])
+                else:
+                    sum_dic[two_sum][pair] = [[i, j]]
 
         for i in range(len(nums) - 1):
             for j in range(i + 1, len(nums)):
@@ -21,7 +20,6 @@ class Solution:
                         if len(set((i,j,k,l)))==4:
                             quads.add(tuple(sorted((nums[i], nums[j], nums[k], nums[l]))))
                             break
-
 
         return quads
 
