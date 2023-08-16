@@ -1,23 +1,30 @@
 class Solution:
     def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
-        quad = set()
-        nums.sort()
+        quads = set()
+        sum_dic = defaultdict(dict)
 
-        for a in range(len(nums)):
-            for b in range(a + 1, len(nums)):
-                c = b + 1
-                d = len(nums) - 1
-
-                while c < d:
-                    total = nums[a] + nums[b] + nums[c] + nums[d]
-                    if total > target:
-                        d -= 1
-                    elif total < target:
-                        c += 1
+        for i in range(len(nums)):
+            for j in range(i+1, len(nums)):
+                # if i != j:
+                    two_sum = nums[i] + nums[j]
+                    pair = tuple(sorted((nums[i], nums[j])))
+                    if pair in sum_dic[two_sum]:
+                         sum_dic[two_sum][pair].append([i, j])
                     else:
-                        quad.add(tuple(sorted((nums[a], nums[b], nums[c], nums[d]))))
-                        c += 1
-                        d -= 1
+                        sum_dic[two_sum][pair] = [[i, j]]
 
-        return quad
+        for i in range(len(nums) - 1):
+            for j in range(i + 1, len(nums)):
+                complement = target - nums[i] - nums[j]
+                for pair in sum_dic[complement]:
+                    for k, l in sum_dic[complement][pair]:
+                        if len(set((i,j,k,l)))==4:
+                            quads.add(tuple(sorted((nums[i], nums[j], nums[k], nums[l]))))
+                            break
+
+
+        return quads
+
+
+
             
