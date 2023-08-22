@@ -2,7 +2,6 @@ class Solution:
     def lastStoneWeight(self, stones: List[int]) -> int:
         stones = [-stone for stone in stones]
         heapq.heapify(stones)
-        print(stones)
 
         while len(stones) > 1:
             y, x = heapq.nsmallest(2, stones)
