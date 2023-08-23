@@ -13,8 +13,8 @@ class KthLargest:
 
         while len(self.stream) > self.k:
             heapq.heappop(self.stream)
-            
-        return self.stream[0] if len(self.stream) else -1
+
+        return self.stream[0]
 
         
 
