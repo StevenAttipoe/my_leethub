@@ -1,5 +1,13 @@
 class Solution:
     def smallestRangeI(self, nums: List[int], k: int) -> int:
-        score = max(nums) - min(nums)
+        ''' 
+        The smallest possible difference is given as
+        =>  (max(A) - K) - (min(A) + K) 
+            = max(A) - K - min(A) - K
+        '''
+        
+        largest_min = min(nums) + k
+        smallest_max = max(nums) - k
 
-        return score - (2*k) if score > 2 * k else 0
+        return max(0, max(nums) - min(nums) - k - k)
+
