@@ -7,22 +7,24 @@
 class Solution:
     paths = 0
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
-        def dfs(node, isRoot, runningSum):
+        def dfs(node, curSumPath, cache):
             if not node:
                 return
 
-            runningSum -= node.val
-            if runningSum == 0:
-                self.paths += 1
+            curSumPath += node.val
+            oldPathSum = curSumPath - targetSum
 
-            dfs(node.left, False, runningSum)
-            dfs(node.right, False, runningSum)
+            self.paths += cache.get(oldPathSum, 0)
+            cache[curSumPath] = cache.get(curSumPath, 0) + 1
 
-            if isRoot:
-                dfs(node.left, True, targetSum)
-                dfs(node.right, True, targetSum)
+            dfs(node.left, curSumPath, cache)
+            dfs(node.right, curSumPath, cache)
 
-        dfs(root, True, targetSum)
+            # when move to a different branch, the curSumPath is no longer available
+            cache[curSumPath] -= 1
+
+        cache = {0:1}
+        dfs(root, 0, cache)
         return self.paths
 
 
