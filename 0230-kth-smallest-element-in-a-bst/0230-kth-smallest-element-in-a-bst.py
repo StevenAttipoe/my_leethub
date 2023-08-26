@@ -20,7 +20,6 @@ class Solution:
             dfs(node.right)
 
         dfs(root)
-        print(heap)
         return -heap[0]
 
 
