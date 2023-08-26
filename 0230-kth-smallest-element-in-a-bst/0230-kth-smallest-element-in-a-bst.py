@@ -13,7 +13,7 @@ class Solution:
                 return 
 
             heapq.heappush(heap, -node.val)
-            while len(heap) > k:
+            if len(heap) > k:
                 heapq.heappop(heap)
 
             dfs(node.left)
