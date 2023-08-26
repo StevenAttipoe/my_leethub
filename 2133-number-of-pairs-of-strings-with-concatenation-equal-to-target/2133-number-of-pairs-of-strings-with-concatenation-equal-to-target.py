@@ -1,10 +1,14 @@
 class Solution:
     def numOfPairs(self, nums: List[str], target: str) -> int:
+        count = Counter(nums)
         pairs = 0
 
-        for i in range(len(nums)):
-            for j in range(len(nums)):
-                if i != j and nums[i] + nums[j] == target:
-                    pairs += 1
+        for num, freq in count.items():
+            if target.startswith(num):
+                suffix = target[len(num):]
+                pairs += freq * count[suffix]
+
+                if num == suffix:
+                    pairs -= count[suffix]
 
         return pairs
