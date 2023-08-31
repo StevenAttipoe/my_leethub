@@ -1,7 +1,7 @@
 class Solution:
     def bestClosingTime(self, customers: str) -> int:
         n = len(customers)
-        cost = min_cost = customers.count('Y')
+        cost = min_cost = 0
         best_time = 0
         for i in range(n):
             if customers[i] == 'Y':
@@ -16,6 +16,22 @@ class Solution:
         return best_time
 
     def bestClosingTime2(self, customers: str) -> int:
+        n = len(customers)
+        cost = min_cost = customers.count('Y')
+        best_time = 0
+        for i in range(n):
+            if customers[i] == 'Y':
+                cost = cost - 1
+            else:
+                cost = cost + 1
+
+            if cost < min_cost:
+                best_time = i + 1
+                min_cost = cost
+
+        return best_time
+
+    def bestClosingTime3(self, customers: str) -> int:
         n = len(customers)
         cost = 0
 
