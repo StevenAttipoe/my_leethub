@@ -1,8 +1,9 @@
 class Solution:
+    # n = len(S), m = len(words), c = len(longest word in words)
+    # O(n * m * c)
     def numMatchingSubseq(self, s: str, words: List[str]) -> int:
         count = 0
         word_dic = defaultdict(list)
-
 
         for word in words:
             word_dic[word[0]].append(word)
