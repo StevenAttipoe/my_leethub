@@ -6,7 +6,7 @@ class Solution:
         for status in customers:
             if status == 'Y':
                 cost += 1
-                
+
         costs = {0 : cost}
 
         for i in range(1, n + 1):
@@ -15,5 +15,7 @@ class Solution:
             else:
                 costs[i] = costs[i - 1] + 1
 
-        return min(costs, key = costs.get)
+        minPenalty = min(costs.values())
+        bestTime =[ key for key in costs.keys() if minPenalty == costs[key]]
+        return bestTime[0]
 
