@@ -15,13 +15,9 @@ class Solution:
             fast = fast.next.next
 
         #Reverse second half
-        prev = None
-        cur = slow
+        prev, cur = None, slow
         while cur:
-            nxt = cur.next
-            cur.next = prev
-            prev = cur
-            cur = nxt
+            cur.next, prev, cur = prev, cur, cur.next
 
         #Merged first and second halves by order
         first = head
