@@ -8,6 +8,32 @@ class Solution:
         if not head.next:
             return
 
+        #Find middle
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        #Reverse second half
+        prev = None
+        cur = slow
+        while cur:
+            nxt = cur.next
+            cur.next = prev
+            prev = cur
+            cur = nxt
+
+        #Merged first and second halves by order
+        first = head
+        second = prev
+        while second.next:
+            first.next, first = second, first.next
+            second.next, second = first, second.next
+
+    def reorderList2(self, head: Optional[ListNode]) -> None:
+        if not head.next:
+            return
+
         dummy = head
         nodes = []
         while dummy:
@@ -26,6 +52,12 @@ class Solution:
             r -= 1
 
         end.next = None
+
+
+
+
+
+        
 
 
 
