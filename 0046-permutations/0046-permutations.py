@@ -1,19 +1,19 @@
 class Solution:
-    # O(n⋅n!) runtime
-    # O(n) space
     def permute(self, nums: List[int]) -> List[List[int]]:
-        result = []
+        permutations = []
 
-        def backtrack(i):
-            if len(nums) == i:
-                result.append(nums[:])
+        def helper(i):
+            if i == len(nums):
+                permutations.append(nums[:])
                 return
 
             for j in range(i, len(nums)):
-                nums[i], nums[j] = nums[j], nums[i] #swap
-                backtrack(i + 1)
-                nums[i], nums[j] = nums[j], nums[i] #swap back
+                nums[i], nums[j] = nums[j], nums[i]
+                helper(i + 1)
+                nums[i], nums[j] = nums[j], nums[i]
 
-        backtrack(0)
-        return result
+        helper(0)
+        
+        return permutations
+
         
