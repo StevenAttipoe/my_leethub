@@ -16,6 +16,36 @@ class Solution:
 
         while q:
             n = len(q)
+            level = deque()
+
+            for _ in range(n):
+                node = q.popleft()
+                if isFlipped:
+                    level.appendleft(node.val)
+                else:
+                    level.append(node.val)
+
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+
+            isFlipped = not isFlipped
+            res.append(level)
+
+        return res
+
+    def zigzagLevelOrder2(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return
+        
+        q = deque()
+        q.append(root)
+        res = []
+        isFlipped = False
+
+        while q:
+            n = len(q)
             level = []
 
             for _ in range(n):
@@ -35,5 +65,7 @@ class Solution:
             isFlipped = not isFlipped
 
         return res
+
+        
 
         
