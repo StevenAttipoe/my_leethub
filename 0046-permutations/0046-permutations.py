@@ -11,7 +11,7 @@ class Solution:
                 if num not in permutation:
                     permutation.append(num)
                     helper(permutation)
-                    permutation.pop() #recursively pop x2
+                    permutation.pop() #recursively pop (x2)
 
         helper([])
         
