@@ -9,7 +9,7 @@ class Solution:
         if not root:
             return 0
 
-        count = [0]
+        self.count = 0 
         def postOrderTraverse(node):
             if not node:
                 return []
@@ -19,7 +19,7 @@ class Solution:
             left = postOrderTraverse(node.left)
             right = postOrderTraverse(node.right) 
 
-            count[0] += self.checkForGoodPairs(left, right, distance)
+            self.checkForGoodPairs(left, right, distance)
 
             pairs = left + right
 
@@ -27,14 +27,12 @@ class Solution:
                 pairs[i] += 1 #Update pairs distance
 
             return pairs
-
+        
         postOrderTraverse(root)
-        return count[0]
+        return self.count
 
     def checkForGoodPairs(self,left, right, distance):
-        count = 0
         for l in left:
             for r in right:
                 if l + r <= distance:
-                    count += 1
-        return count
+                    self.count += 1
