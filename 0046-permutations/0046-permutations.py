@@ -11,10 +11,12 @@ class Solution:
                 if num not in permutation:
                     permutation.append(num)
                     helper(permutation)
-                    permutation.pop()
+                    permutation.pop() #recursively pop x2
+
         helper([])
         
         return permutations
+
 
     def permute2(self, nums: List[int]) -> List[List[int]]:
         permutations = []
