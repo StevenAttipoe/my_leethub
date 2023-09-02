@@ -13,8 +13,8 @@ class Solution:
             helper(root.left, order)
             helper(root.right, order)
             order.append(root.val)
-
         
         res = []
         helper(root, res)
+        print(res)
         return res
