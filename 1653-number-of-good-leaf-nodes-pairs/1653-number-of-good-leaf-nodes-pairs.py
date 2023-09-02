@@ -20,9 +20,7 @@ class Solution:
             right = postOrderTraverse(node.right) 
 
             self.checkForGoodPairs(left, right, distance)
-
             pairs = left + right
-
             for i in range(len(pairs)):
                 pairs[i] += 1 #Update pairs distance
 
