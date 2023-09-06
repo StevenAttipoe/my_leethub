@@ -14,6 +14,16 @@ class Solution:
             return self.reachingPoints(sx, sy, tx, ty % tx)
         
         return False
-        
+
+        # find y
+        # x, xn +y = ty
+
+        # find x
+        # x + yn = tx
+
+        # n = (ty - y) % x == 0
+
+        # n = (tx - x) % y == 0
+            
 
         
