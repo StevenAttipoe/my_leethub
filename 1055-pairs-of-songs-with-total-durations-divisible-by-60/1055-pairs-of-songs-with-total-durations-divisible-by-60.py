@@ -5,8 +5,17 @@ class Solution:
         
         for duration in time:
             remainder, complement = duration % 60, -duration % 60
-            
             noOfPairs += count[complement]
             count[remainder] += 1
+
+        return noOfPairs
+
+    def numPairsDivisibleBy60II(self, time: List[int]) -> int:
+        noOfPairs = 0
+        
+        for i in range(len(time)):
+            for j in range(i + 1, len(time)):
+                if (time[i] + time[j]) % 60 == 0:
+                    noOfPairs += 1
 
         return noOfPairs
