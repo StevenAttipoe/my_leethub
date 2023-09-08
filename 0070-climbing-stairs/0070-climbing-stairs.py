@@ -1,5 +1,5 @@
 class Solution:
-    def climbStairs2(self, n: int) -> int:
+    def climbStairs(self, n: int) -> int:
         dp = [0] * (n + 1)
         dp[0] = dp[1] = 1
 
@@ -8,7 +8,7 @@ class Solution:
         
         return dp[-1]
 
-    def climbStairs(self, n: int) -> int:
+    def climbStairs2(self, n: int) -> int:
         memo = [0] * (n + 1)
         def takeSteps(step, n, memo):
             if step > n:
