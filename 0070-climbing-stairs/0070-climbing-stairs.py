@@ -10,15 +10,16 @@ class Solution:
 
     def climbStairs(self, n: int) -> int:
         memo = [0] * (n + 1)
-        return self.takeSteps(0, n, memo)
-    
-    def takeSteps(self, step, n, memo):
-        if step > n:
-            return 0
-        if step == n:
-            return 1
-        if memo[step] > 0:
-            return memo[step]
+        def takeSteps(step, n, memo):
+            if step > n:
+                return 0
+            if step == n:
+                return 1
+            if memo[step] > 0:
+                return memo[step]
 
-        memo[step] = self.takeSteps(step + 1, n, memo) + self.takeSteps(step + 2, n, memo)
-        return memo[step]
+            memo[step] = takeSteps(step + 1, n, memo) + takeSteps(step + 2, n, memo)
+            return memo[step]
+        return takeSteps(0, n, memo)
+    
+    
