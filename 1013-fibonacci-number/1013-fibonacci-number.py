@@ -3,6 +3,19 @@ class Solution:
         if n == 0 or n == 1:
             return n
 
+        a, b = 0, 1        
+
+        for i in range(2, n + 1):
+            c = a + b
+            a, b = b, c
+
+        return b
+
+
+    def fib2(self, n: int) -> int:
+        if n == 0 or n == 1:
+            return n
+
         dp = [0] * (n + 1)
         dp[0] = 0
         dp[1] = 1
