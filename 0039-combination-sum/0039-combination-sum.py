@@ -1,4 +1,6 @@
 class Solution:
+    # Time Complexity: O(N^(T/M+1))
+    # Space Complexity: O(T/M)
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         results = []
 
