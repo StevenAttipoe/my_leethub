@@ -30,14 +30,6 @@ class Codec:
             return root
 
         return dfs(deque(vals))
-    # def serialize(self, root: Optional[TreeNode]) -> str:
-    #     """Encodes a tree to a single string.
-    #     """
-        
-
-    # def deserialize(self, data: str) -> Optional[TreeNode]:
-    #     """Decodes your encoded data to tree.
-    #     """
         
 
 # Your Codec object will be instantiated and called as such:
