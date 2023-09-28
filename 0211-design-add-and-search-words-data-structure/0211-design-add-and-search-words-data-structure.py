@@ -29,6 +29,9 @@ class WordDictionary:
             else:
                 if word[i] in cur.children:
                     return dfs(cur.children[word[i]], i + 1)
+            
+            return False
+
         return dfs(self.root, 0)
 
 
