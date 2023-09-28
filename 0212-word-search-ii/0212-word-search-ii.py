@@ -40,13 +40,16 @@ class Solution:
 
         char = board[r][c]
         board[r][c] = '#'
-        trie = trie.children[char]
+        nextLevel = trie.children[char]
 
-        self.search(r + 1, c, board, res, trie, word + [char])
-        self.search(r - 1, c, board, res, trie, word + [char])
-        self.search(r, c + 1, board, res, trie, word + [char])
-        self.search(r, c - 1, board, res, trie, word + [char])
+        self.search(r + 1, c, board, res, nextLevel, word + [char])
+        self.search(r - 1, c, board, res, nextLevel, word + [char])
+        self.search(r, c + 1, board, res, nextLevel, word + [char])
+        self.search(r, c - 1, board, res, nextLevel, word + [char])
         board[r][c] = char
+
+        if len(nextLevel.children) == 0:
+            del trie.children[char]
         
     def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
         self.buildTrie(words)
