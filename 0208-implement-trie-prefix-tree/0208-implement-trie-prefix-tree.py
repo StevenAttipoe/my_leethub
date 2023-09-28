@@ -25,11 +25,10 @@ class Trie:
                 cur = cur.children[char]
             else:
                 return False
-        return cur.isEnd == True
+        return cur.isEnd 
 
     def startsWith(self, prefix: str) -> bool:
         cur = self.root
-        lastChar = ''
 
         for char in prefix:
             if char in cur.children:
@@ -37,7 +36,7 @@ class Trie:
                 lastChar = char
             else:
                 return False
-        return prefix[-1] == lastChar
+        return True
         
 
 
