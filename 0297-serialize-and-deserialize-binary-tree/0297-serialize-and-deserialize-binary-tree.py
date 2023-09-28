@@ -19,7 +19,7 @@ class Codec:
             return None
 
         def dfs(nums):
-            val = nums.pop(0)
+            val = nums.popleft()
             if not val:
                 return None
 
@@ -29,7 +29,7 @@ class Codec:
 
             return root
 
-        return dfs(vals)
+        return dfs(deque(vals))
 
         
 
