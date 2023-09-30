@@ -7,9 +7,7 @@ class Solution:
             "Oct": '10', "Nov": '11', "Dec": '12'
         }
 
-        date = date.split(' ')
-        day, month, year = date[0], date[1], date[2]
-
+        day, month, year = date.split(' ')
         day = day[:2] if len(day) == 4 else '0' + day[:1]
         month = months[month]
 
