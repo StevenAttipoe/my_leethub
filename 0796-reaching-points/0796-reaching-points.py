@@ -1,5 +1,19 @@
 class Solution:
     def reachingPoints(self, sx: int, sy: int, tx: int, ty: int) -> bool:
+        while tx >= sx and ty >= sy:
+            if sx == tx:
+                return (ty - sy) % sx == 0 
+            if sy == ty:
+                return (tx - sx) % sy == 0
+            
+            if tx > ty:
+                tx %= ty
+            else:
+                ty %= tx
+
+        return False
+
+    def reachingPoints1(self, sx: int, sy: int, tx: int, ty: int) -> bool:
         if sx > tx or sy > ty:
             return False
 
@@ -15,15 +29,27 @@ class Solution:
         
         return False
 
-        # find y
-        # x, xn +y = ty
+    def reachingPoints2(self, sx: int, sy: int, tx: int, ty: int) -> bool:
+        while tx >= sx and ty >= sy:
+            if sx == tx and sy == ty:
+                return True
+            
+            if tx > ty:
+                tx -= ty
+            else:
+                ty -= tx
 
-        # find x
-        # x + yn = tx
+        return False
 
-        # n = (ty - y) % x == 0
+    # find y
+    # x, xn +y = ty
 
-        # n = (tx - x) % y == 0
+    # find x
+    # x + yn = tx
+
+    # n = (ty - y) % x == 0
+
+    # n = (tx - x) % y == 0
             
 
         
