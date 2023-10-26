@@ -4,7 +4,6 @@ class Solution:
 
         for a in range(len(numbers)):
             b = self.search(a, target, numbers)
-            print(a, b)
             if b != None and a !=b:
                 return [a + 1, b + 1]
 
