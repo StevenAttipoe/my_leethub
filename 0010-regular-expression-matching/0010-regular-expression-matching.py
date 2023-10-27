@@ -2,7 +2,6 @@ class Solution:
     def isMatch(self, s: str, p: str) -> bool:
         memo = {}
         def dp(i,j):
-            print(memo)
             if (i, j) not in memo:
                 if j == len(p):
                     ans = i == len(s)
