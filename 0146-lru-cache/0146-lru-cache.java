@@ -62,7 +62,6 @@ class LRUCache {
             node.value = value;
             deleteNode(node);
             addToHead(node);
-            // cache.replace(key, node);
         } else {
             Node node = new Node(key, value, null, null);
             if(cache.size() < capacity){
@@ -70,7 +69,7 @@ class LRUCache {
                 addToHead(node);
             } else {
                 cache.remove(tail.prev.key);
-                deleteNode(tail.prev);
+                deleteNode(tail.prev); // or use removeFromTail();
                 cache.put(key, node);
                 addToHead(node);        
             }
