@@ -58,6 +58,8 @@ class LFUCache:
                 dll = self.frequencies[self.minf]
                 del self.cache[dll.tail.prev.key]
                 dll.removeNode(dll.tail.prev)
+                if dll.head.next == dll.tail:
+                    del self.frequencies[self.minf]
 
             newNode = Node(key, value)
             self.cache[key] = (1, newNode)
