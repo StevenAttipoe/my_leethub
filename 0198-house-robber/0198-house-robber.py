@@ -8,6 +8,26 @@ class Solution:
         if n == 2:
             return max(nums[0], nums[1])
 
+        first = nums[0]
+        second = max(nums[0], nums[1])
+
+        for i in range(2, n):
+            cur = max(second, first + nums[i])
+            first = second
+            second = cur
+
+        return cur
+
+            
+    def rob2(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n == 0:
+            return 0
+        if n == 1:
+            return nums[0]
+        if n == 2:
+            return max(nums[0], nums[1])
+
         dp = [0] * n 
         dp[0] = nums[0]
         dp[1] = max(nums[0], nums[1])
