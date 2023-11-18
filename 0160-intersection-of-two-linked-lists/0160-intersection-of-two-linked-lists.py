@@ -10,14 +10,14 @@ class Solution:
         second = headB
 
         while first != second:
-            first = headB if first.next is None else first.next
-            second = headA if second.next is None else second.next
+            first = headB if first is None else first.next
+            second = headA if second is None else second.next
 
         return first
 
 
 
-    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+    def getIntersectionNode2(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
         setA = set()
 
         while headA:
