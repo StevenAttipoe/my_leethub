@@ -9,11 +9,10 @@ class Solution:
             x = 1 / x
             n = abs(n)
 
-        half = self.myPow(x, n // 2)
         if n % 2 == 0:
-            return half * half
+            return self.myPow(x * x, n // 2)
         else:
-            return half * half * x
+            return x * self.myPow(x * x, n // 2)
 
     # O(n)
     def myPow2(self, x: float, n: int) -> float:
