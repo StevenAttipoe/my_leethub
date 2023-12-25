@@ -27,7 +27,6 @@ class Solution:
 
         dummy = ListNode(-1)
         dummy.next = head
-        cur = dummy
 
         prev, cur = dummy, dummy.next
         while cur:
@@ -38,4 +37,24 @@ class Solution:
             cur = cur.next
             
         return dummy.next
+
+    def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
+        if not head:
+            return head
+
+        dummy = ListNode(-1)
+        dummy.next = head
+
+        cur = dummy
+        while cur.next:
+            if cur.next.val == val:
+                cur.next = cur.next.next
+            else:
+                cur = cur.next
+            
+        return dummy.next
+
+
+
+
         
