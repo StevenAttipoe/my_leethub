@@ -55,19 +55,13 @@ class Solution:
         for i in range(ROWS):
             for j in range(COLS):
                 count = countLiveNeighbours(i, j)
-                if (board[i][j] and (count == 2 or count == 3)):
-                    temp[i][j] = 1
-                elif(board[i][j] and (count < 2 or count > 3)):
-                    temp[i][j] = 0
-                elif(board[i][j] == 0 and count == 3):
-                    temp[i][j] = 1
+                if board[i][j]:
+                    if count == 2 or count == 3:
+                        temp[i][j] = 1
+                else:
+                    if count == 3:
+                        temp[i][j] = 1
         
         for i in range(ROWS):
             for j in range(COLS):
                 board[i][j] = temp[i][j]
-
-        
-
-
-
-        
