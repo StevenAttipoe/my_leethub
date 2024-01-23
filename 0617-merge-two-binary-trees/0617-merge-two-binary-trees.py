@@ -13,8 +13,8 @@ class Solution:
             
             merged = TreeNode((node1.val if node1 else 0) + (node2.val if node2 else 0))
         
-            merged.left = dfs(node1.left if node1 else None, node2.left if node2 else None)
-            merged.right = dfs(node1.right if node1 else None, node2.right if node2 else None)
+            merged.left = dfs(node1 and node1.left, node2 and node2.left)
+            merged.right = dfs(node1 and node1.right, node2 and node2.right)
 
             return merged
 
