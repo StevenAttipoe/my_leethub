@@ -1,5 +1,18 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
+        if n == 0 or n == 1:
+            return 1
+
+        step_zero = step_one = 1
+
+        for _ in range(2, n + 1):
+            step_three = step_zero + step_one
+            step_zero = step_one
+            step_one = step_three
+
+        return step_three
+
+    def climbStairs2(self, n: int) -> int:
         dp = [0] * (n + 1)
         dp[0] = dp[1] = 1
 
@@ -8,7 +21,7 @@ class Solution:
         
         return dp[-1]
 
-    def climbStairs2(self, n: int) -> int:
+    def climbStairs3(self, n: int) -> int:
         memo = [0] * (n + 1)
         def takeSteps(step, n, memo):
             if step > n:
