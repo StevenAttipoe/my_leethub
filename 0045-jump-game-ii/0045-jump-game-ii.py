@@ -1,5 +1,24 @@
 class Solution:
     def jump(self, nums: List[int]) -> int:
+        N = len(nums) - 1
+        minJumps = 0
+        jumpEnd = farthestStep = 0
+
+        for i in range(N):
+            farthestStep = max(farthestStep, i + nums[i])
+
+            if farthestStep >= N:
+                minJumps += 1
+                return minJumps
+            
+            if i == jumpEnd:
+                jumpEnd = farthestStep
+                minJumps += 1
+
+        return minJumps
+            
+
+    def jump2(self, nums: List[int]) -> int:
         minJumps = 0
         l = r = 0
 
@@ -13,3 +32,4 @@ class Solution:
             minJumps += 1
 
         return minJumps
+        
