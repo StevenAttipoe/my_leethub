@@ -8,7 +8,6 @@ class Solution:
                 factors.append(i)
 
             i += 1
-            print(factors)
 
         return -1 if len(factors) != k else factors[-1]
 
