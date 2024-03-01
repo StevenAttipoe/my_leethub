@@ -5,7 +5,7 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def kthSmallest2(self, root: Optional[TreeNode], k: int) -> int:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         self.k = k
         self.smallestKValue = root.val
 
@@ -18,7 +18,7 @@ class Solution:
 
             dfs(node.right)
 
-    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+    def kthSmallest2(self, root: Optional[TreeNode], k: int) -> int:
         vals = []
 
         def dfs(node):
