@@ -14,9 +14,16 @@ class Solution:
                 return None
 
             dfs(node.left)
-
+            
+            self.k -= 1
+            if self.k == 0:
+                self.smallestKValue = node.val
+                return
 
             dfs(node.right)
+
+        dfs(root)
+        return self.smallestKValue
 
     def kthSmallest2(self, root: Optional[TreeNode], k: int) -> int:
         vals = []
