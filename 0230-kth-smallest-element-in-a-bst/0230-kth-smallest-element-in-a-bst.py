@@ -5,6 +5,29 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    # O(H + k) time
+    # O(H) space
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        stack = []
+        cur = root
+
+        while True:
+            while cur:
+                stack.append(cur)
+                cur = cur.root
+
+            cur = stack.pop()
+
+            k -= 1
+            if not k:
+                return cur.val
+
+            cur = cur.right
+
+        return -1
+
+    # O(n) time 
+    # O(1) space ignoring recursive stack
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         self.k = k
         self.smallestKValue = root.val
@@ -25,6 +48,7 @@ class Solution:
         dfs(root)
         return self.smallestKValue
 
+    # O(n) time and space
     def kthSmallest2(self, root: Optional[TreeNode], k: int) -> int:
         vals = []
 
