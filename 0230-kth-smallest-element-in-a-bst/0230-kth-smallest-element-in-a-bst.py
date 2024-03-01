@@ -14,7 +14,7 @@ class Solution:
         while True:
             while cur:
                 stack.append(cur)
-                cur = cur.root
+                cur = cur.left
 
             cur = stack.pop()
 
