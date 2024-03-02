@@ -6,11 +6,10 @@ class Solution:
         for n in numsSet:
             if n - 1 not in numsSet:
                 curStreak = 0
-                curNo = n
 
-                while curNo in numsSet:
+                while n in numsSet:
                     curStreak += 1
-                    curNo += 1
+                    n += 1
 
                 maxStreak = max(maxStreak, curStreak)
 
