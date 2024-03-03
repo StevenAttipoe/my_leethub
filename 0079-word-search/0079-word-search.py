@@ -1,31 +1,40 @@
 class Solution:
+    """ 
+    O(N * 3^L) time
+    N - The number of cells in the board
+    L - length of the word
+
+    O(L) space
+    """
     def exist(self, board: List[List[str]], word: str) -> bool:
-        if not board:
-            return False
-        
-        ROW, COL = len(board), len(board[0])
-        visited = {}
-        
-        for i in range(ROW):
-            for j in range(COL):
-                if self.dfs(board, word, i, j, visited):
-                    return True
+        ROWS, COLS = len(board), len(board[0])
+
+        for i in range(ROWS):
+            for j in range(COLS):
+                if board[i][j] == word[0]:
+                    isFound = self.dfs(i, j, board, word)
+                    if isFound:
+                        return True
+
         return False
-        
-    def dfs(self, board, word, i, j , visited, pos=0):
-        if pos == len(word):
+
+    def dfs(self, i, j, board, suffix):
+        if len(suffix) == 0:
             return True
-        
-        if i < 0 or i == len(board) or  j < 0 or j == len(board[0]) or visited.get((i,j)) or word[pos] != board[i][j]:
+
+        if i < 0 or j < 0 or i >= len(board) or j >= len(board[0]) \
+                or board[i][j] != suffix[0]:
             return False
-        
-        visited[(i,j)] = True
-        
-        res = self.dfs(board, word, i + 1, j, visited, pos + 1) or \
-                self.dfs(board, word, i, j + 1, visited, pos + 1) or \
-                self.dfs(board, word, i - 1, j, visited, pos + 1) or \
-                self.dfs(board, word, i, j - 1, visited, pos + 1)
-        visited[(i,j)] = False
-        return res
-        
-                
+
+        temp = board[i][j]
+        board[i][j] = '#'
+
+        isFound = (
+            self.dfs(i + 1, j, board, suffix[1:]) or
+            self.dfs(i - 1, j, board, suffix[1:]) or
+            self.dfs(i, j + 1, board, suffix[1:]) or
+            self.dfs(i, j - 1, board, suffix[1:])
+        )
+
+        board[i][j] = temp
+        return isFound
