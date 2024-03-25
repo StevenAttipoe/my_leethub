@@ -6,7 +6,11 @@ class Solution:
         for c in s:
             charTable[c] = charTable.get(c, 0) + 1
 
-        sortedChars = sorted(charTable, key = lambda c: charTable[c], reverse = True)
+        sortedChars = sorted(
+            charTable, 
+            key = lambda c: charTable[c], 
+            reverse = True
+        )
 
         if charTable[sortedChars[0]] > (N + 1) // 2:
             return ""
@@ -23,3 +27,4 @@ class Solution:
                 i += 2
 
         return ''.join(result)
+
