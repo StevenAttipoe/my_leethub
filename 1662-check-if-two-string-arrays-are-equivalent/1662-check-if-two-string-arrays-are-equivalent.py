@@ -4,24 +4,24 @@ class Solution:
         p1 = p2 = 0
 
         while i < len(word1) and j < len(word2):
-            while p1 < len(word1[i]) or p2 < len(word2[j]):
-                if word1[i][p1] != word[j][p2]:
-                    break
+            if word1[i][p1] != word2[j][p2]:
+                return False   
 
-                p1 += 1
-                p2 += 1
+            p1 += 1
+            p2 += 1
 
             if p1 >= len(word1[i]):
                 i += 1
-            elif p2 >= len(word2[j]):
+                p1 = 0
+
+            if p2 >= len(word2[j]):
                 j += 1
-            else:
-                return False
+                p2 = 0                
 
-        return True
+        return i == len(word1) and j == len(word2)
 
 
-    def arrayStringsAreEqual(self, word1: List[str], word2: List[str]) -> bool:
+    def arrayStringsAreEqual2(self, word1: List[str], word2: List[str]) -> bool:
         return ''.join(word1) == ''.join(word2)
 
         
