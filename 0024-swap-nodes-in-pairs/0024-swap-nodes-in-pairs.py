@@ -9,23 +9,36 @@ class Solution:
             return head
 
         newHead = head.next
-        prev, cur = None, head
+        head.next = self.swapPairs(head.next.next)
+        newHead.next = head
+
+        return newHead
+
+    def swapPairs2(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+
+        cur, newHead = head, head.next
+        prev = None
 
         while cur and cur.next:
-            a = cur
-            b = cur.next
-            c = cur.next.next
-
-            b.next = a
-            a.next = c
+            a, b, c = cur, cur.next, cur.next.next
 
             if prev:
                 prev.next = b
 
+            self.swap(a, b, c)
+
             prev = a
             cur = c
-        return newHead            
-
-			
             
+        return newHead
+
+    def swap(self, a, b, c):
+        b.next = a
+        a.next = c
+# 1 -> 2 -> 3 -> 4
+# 2 -> 1 -> 3 -> 4
+# 2 -> 1 -> 4 -> 3
+        
         
