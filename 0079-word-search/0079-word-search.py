@@ -1,40 +1,42 @@
 class Solution:
-    """ 
-    O(N * 3^L) time
-    N - The number of cells in the board
-    L - length of the word
-
-    O(L) space
-    """
     def exist(self, board: List[List[str]], word: str) -> bool:
-        ROWS, COLS = len(board), len(board[0])
+        self.ROWS = len(board)
+        self.COLS = len(board[0])
+        self.board = board
+        self.path = set()
 
-        for i in range(ROWS):
-            for j in range(COLS):
+        for i in range(self.ROWS):
+            for j in range(self.COLS):
                 if board[i][j] == word[0]:
-                    isFound = self.dfs(i, j, board, word)
+                    isFound = self.dfs(i, j, word, 0)
+
                     if isFound:
                         return True
 
         return False
 
-    def dfs(self, i, j, board, suffix):
-        if len(suffix) == 0:
+    def dfs(self, i, j, word, pos):
+        if pos == len(word):
             return True
 
-        if i < 0 or j < 0 or i >= len(board) or j >= len(board[0]) \
-                or board[i][j] != suffix[0]:
+        if i < 0 or i >= self.ROWS or j < 0 or j >= self.COLS:
             return False
 
-        temp = board[i][j]
-        board[i][j] = '#'
+        if (i, j) in self.path or self.board[i][j] != word[pos]:
+            return False
 
-        isFound = (
-            self.dfs(i + 1, j, board, suffix[1:]) or
-            self.dfs(i - 1, j, board, suffix[1:]) or
-            self.dfs(i, j + 1, board, suffix[1:]) or
-            self.dfs(i, j - 1, board, suffix[1:])
-        )
+        self.path.add((i, j))
 
-        board[i][j] = temp
-        return isFound
+        result = (self.dfs(i, j + 1, word, pos + 1) or
+        self.dfs(i, j - 1, word, pos + 1) or
+        self.dfs(i + 1, j, word, pos + 1) or 
+        self.dfs(i - 1, j, word, pos + 1))
+
+        self.path.remove((i,j))
+
+        return result
+
+        
+
+        
+        
