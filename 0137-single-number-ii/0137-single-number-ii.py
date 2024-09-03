@@ -1,5 +1,6 @@
 class Solution:
-    def singleNumber(self, nums: List[int]) -> int:
+    # O(n) time and space 
+    def singleNumber2(self, nums: List[int]) -> int:
         count = {}
 
         for n in nums:
@@ -8,3 +9,18 @@ class Solution:
         for k, v in count.items():
             if v == 1:
                 return k
+
+    # O(nlogn) time and O(n) space 
+    def singleNumber(self, nums: List[int]) -> int:
+        nums.sort()
+        print(nums)
+
+        for i in range(0, len(nums) - 1, 3):
+            print(i, nums[i], nums[i + 1])
+            if nums[i] == nums[i + 1]:
+                continue
+            else:
+                return nums[i]
+
+        return nums[-1]
+
