@@ -1,11 +1,23 @@
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-        elements = []
-        
-        for r in range(9):
-            for c in range(9):
-                if board[r][c] != '.':
-                    digit = board[r][c]
-                    elements += [(r, digit), (digit, c), (r//3, c//3, digit)]
-        return len(elements) == len(set(elements))
+        rows = set()
+        cols = set()
+        boxes = set()
 
+        for i in range(9):
+            for j in range(9):
+                if board[i][j] == '.':
+                    continue
+                
+                val = board[i][j]
+
+                if ((i, val) in rows or
+                    (j, val) in cols or
+                    (i // 3, j // 3, val) in boxes
+                ) : return False
+
+                rows.add((i, val))
+                cols.add((j, val))
+                boxes.add((i // 3, j // 3, val))
+
+        return True
