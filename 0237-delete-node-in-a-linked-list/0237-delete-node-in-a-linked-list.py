@@ -5,12 +5,18 @@
 #         self.next = None
 
 class Solution:
+    # O(1) time and space
     def deleteNode(self, node):
         """
         :type node: ListNode
         :rtype: void Do not return anything, modify node in-place instead.
         """
 
+        node.val = node.next.val
+        node.next = node.next.next
+
+    # O(n) time and O(1) space
+    def deleteNode2(self, node):
         while node and node.next:
             next = node.next
 
