@@ -4,7 +4,8 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def swapPairs2(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    # O(N) time and O(1) space
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if not head or not head.next:
             return head
         
@@ -26,7 +27,8 @@ class Solution:
 
         return newHead
 
-    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    # O(N) time and space
+    def swapPairs2(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if not head or not head.next:
             return head
 
