@@ -12,34 +12,34 @@ class Solution:
         if not head:
             return head
             
-        #Sandwich copyNodes betweent oldNodes
-        cur = head
-        while cur:
-            copy = Node(cur.val)
-            copy.next = cur.next
-            cur.next = copy
-            cur = copy.next
+        copiedHead = Node(head.val)
+        hashmap = {
+            None : None,
+            head : copiedHead
+        }
+        cur = copiedHead
 
-        #Set random pointers for copy nodes
-        cur = head
-        while cur:
-            if cur.random:
-                cur.next.random = cur.random.next
+        while head:
+            if head.next in hashmap:
+                cur.next = hashmap[head.next]
             else:
-                cur.next.random = None
-            cur = cur.next.next
+                copiedNext = Node(head.next.val)
+                cur.next = copiedNext
+                hashmap[head.next] = copiedNext
 
-        #Unweave list
-        oldList = head
-        newList = head.next
-        newHead = head.next
-        while oldList:
-            oldList.next = oldList.next.next
-            if newList.next:
-                newList.next = newList.next.next
+            if head.random in hashmap:
+                cur.random = hashmap[head.random]
+                if hashmap[head.random]:
+                    print(cur.val, hashmap[head.random].val)
             else:
-                 newList.next = None
-            oldList = oldList.next
-            newList = newList.next
+                print(cur.val, "here")
+                copiedRandom = Node(head.random.val)
+                cur.random = copiedRandom
+                hashmap[head.random] = copiedRandom
+            
+            cur = cur.next
+            head = head.next
 
-        return newHead
+        
+        return copiedHead
+        
