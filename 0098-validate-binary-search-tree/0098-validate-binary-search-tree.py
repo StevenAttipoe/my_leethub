@@ -5,7 +5,25 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        def inorder(node):
+            if not node:
+                return True
+            
+            if not inorder(node.left):
+                return False
+            
+            if node.val <= self.prev:
+                return False
+
+            self.prev = node.val
+            return inorder(node.right)
+
+        self.prev = -math.inf
+        return inorder(root)
+
+    def isValidBST2(self, root: Optional[TreeNode]) -> bool:
         
         def dfs(node, low, high):
             if not node:
