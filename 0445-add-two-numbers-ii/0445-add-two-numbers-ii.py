@@ -10,27 +10,21 @@ class Solution:
         
         head = cur = ListNode()
         r = 0
+        totalSum = 0
         while r1 or r2:
-            a = 0
-            b = 0
-
             if r1:
-                a = r1.val
+                totalSum += r1.val
                 r1 = r1.next
             
             if r2:
-                b = r2.val
+                totalSum += r2.val
                 r2 = r2.next
 
             
-            _sum = a + b + r
-            if _sum > 9:
-                r = _sum // 10
-                _sum = _sum % 10
-            else:
-                r = 0
-
-            cur.next = ListNode(_sum)
+            r = totalSum // 10
+            totalSum = totalSum % 10
+            cur.next = ListNode(totalSum)
+            totalSum = r
             cur = cur.next
 
         if r:
