@@ -4,36 +4,38 @@ class TrieNode:
         self.isEnd = False
 
 class Trie:
-
     def __init__(self):
         self.root = TrieNode()
         
     def insert(self, word: str) -> None:
-        cur = self.root
+        root = self.root
 
-        for char in word:
-            if char not in cur.children:
-                cur.children[char] = TrieNode()
-            cur = cur.children[char]
-        cur.isEnd = True
+        for c in word:
+            if c in root.children:
+                root = root.children[c]     
+            else:
+                root.children[c] = TrieNode()
+                root = root.children[c]
+
+        root.isEnd = True
+        
 
     def search(self, word: str) -> bool:
-        cur = self.root
+        root = self.root
 
-        for char in word:
-            if char in cur.children:
-                cur = cur.children[char]
+        for c in word:
+            if c in root.children:
+                root = root.children[c]
             else:
                 return False
-        return cur.isEnd 
+        return root.isEnd
 
     def startsWith(self, prefix: str) -> bool:
-        cur = self.root
+        root = self.root
 
-        for char in prefix:
-            if char in cur.children:
-                cur = cur.children[char]
-                lastChar = char
+        for c in prefix:
+            if c in root.children:
+                root = root.children[c]
             else:
                 return False
         return True
