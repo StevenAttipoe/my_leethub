@@ -3,6 +3,7 @@ class TrieNode:
         self.children = defaultdict(TrieNode)
         self.isEnd = False
 
+
 class Trie:
     def __init__(self):
         self.root = TrieNode()
@@ -12,15 +13,18 @@ class Trie:
         for c in word:
             root = root.children[c]
         root.isEnd = True
-    
-    def getAllWords(self, root, prefix= []):
+
+    def getAllWords(self, root=None, prefix=[]):
+        if not root:
+            root = self.root
+
         words = []
 
         if root.isEnd:
             words.append("".join(prefix))
 
         for i in range(26):
-            c = chr(i + ord('a'))
+            c = chr(i + ord("a"))
             if c in root.children:
                 prefix.append(c)
                 words += self.getAllWords(root.children[c], prefix)
@@ -28,16 +32,32 @@ class Trie:
 
         return words
 
-    
+
 class Pair:
     def __init__(self, word, freq):
         self.word = word
         self.freq = freq
-    
+
     def __lt__(self, p):
         return self.freq < p.freq or (self.freq == p.freq and self.word > p.word)
 
+
 class Solution:
+    """
+    O(N * L) + O(L * K) time
+
+    Given L <= 10, 
+    => O(N * 10) + O(10 * K) time
+    => O(N) + O(K) time
+    => O(N + K) time
+
+    Given K <= N,
+    => O(N + K) time
+    => O(N + N) time
+    => O(N) time
+
+    O(N) space
+    """
     def topKFrequent(self, words: List[str], k: int) -> List[str]:
         wordFreq = {}
 
@@ -46,12 +66,15 @@ class Solution:
 
         buckets = [Trie() for _ in range(len(words))]
 
-        for w,f in wordFreq.items():
+        #O(N * L)
+        for w, f in wordFreq.items():
             buckets[f - 1].insert(w)
 
         result = []
+
+        # O(L * K)
         for i in range(len(buckets) - 1, -1, -1):
-            words = buckets[i].getAllWords(buckets[i].root)
+            words = buckets[i].getAllWords()
             for w in words:
                 if k > 0:
                     result.append(w)
@@ -68,7 +91,7 @@ class Solution:
             wordFreq[w] = wordFreq.get(w, 0) + 1
 
         heap = []
-        for w,f in wordFreq.items():
+        for w, f in wordFreq.items():
             heapq.heappush(heap, Pair(w, f))
 
             if len(heap) > k:
@@ -83,7 +106,7 @@ class Solution:
         for w in words:
             wordFreq[w] = wordFreq.get(w, 0) + 1
 
-        heap = [(-f, w) for w,f in wordFreq.items()]
+        heap = [(-f, w) for w, f in wordFreq.items()]
         heapq.heapify(heap)
 
         return [heapq.heappop(heap)[1] for _ in range(k)]
@@ -95,6 +118,5 @@ class Solution:
         for w in words:
             wordFreq[w] = wordFreq.get(w, 0) + 1
 
-        result = sorted(wordFreq.keys(), key = lambda w: (-wordFreq[w], w))
+        result = sorted(wordFreq.keys(), key=lambda w: (-wordFreq[w], w))
         return result[:k]
-        
