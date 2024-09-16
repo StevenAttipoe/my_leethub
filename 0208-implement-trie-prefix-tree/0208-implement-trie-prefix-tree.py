@@ -11,11 +11,9 @@ class Trie:
         root = self.root
 
         for c in word:
-            if c in root.children:
-                root = root.children[c]     
-            else:
-                root.children[c] = TrieNode()
-                root = root.children[c]
+            if c not in root.children:
+                root.children[c] = TrieNode()                
+            root = root.children[c]
 
         root.isEnd = True
         
