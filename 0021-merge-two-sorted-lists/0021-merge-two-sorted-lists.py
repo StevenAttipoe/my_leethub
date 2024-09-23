@@ -4,7 +4,7 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def mergeTwoLists(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+    def mergeTwoLists2(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         head = cur = ListNode()
 
         while l1 and l2:
@@ -21,7 +21,7 @@ class Solution:
         cur.next = l1 or l2
         return head.next
 
-    def mergeTwoLists2(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+    def mergeTwoLists(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         head = cur = ListNode()
 
         while l1 or l2:
@@ -31,12 +31,12 @@ class Solution:
             if val1 <= val2:
                 cur.next = ListNode(val1)
                 l1 = l1.next
-                cur = cur.next
 
             elif val1 >= val2:
                 cur.next = ListNode(val2)
                 l2 = l2.next
-                cur = cur.next
+                
+            cur = cur.next
         
         return head.next
 
