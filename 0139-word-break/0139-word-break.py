@@ -1,18 +1,18 @@
 class Solution:
-    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        wordSet = set(wordDict)
-        T = [False] * len(s)
-        for i in range(len(s)):
-            for word in wordSet:
-                left = i - len(word) + 1
-                if left < -1:
-                    continue
-                if s[left:i+1] in wordSet and (left == 0 or T[left - 1]):
-                    T[i] = True
-                    break
-        return T[len(s) - 1]
-            
-        
+    def wordBreak(self, s: str, wordList: List[str]) -> bool:
+        wordSet = set(wordList)
 
-        
-        
+        @cache
+        def recurse(p):
+            if p == len(s):
+                return True
+
+            for word in wordSet:
+                for i in range(p, len(s)):
+                    substr = s[p: i + 1]
+                    if word == substr:
+                        if recurse(i + 1):
+                            return True
+            return False
+
+        return recurse(0)
