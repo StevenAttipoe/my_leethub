@@ -1,10 +1,7 @@
 class Solution:
     # def longestPalindrome(self, s: str) -> str:
         
-    def longestPalindrome(self, s: str) -> str:
-        if len(s) == 1:
-            return s
-        
+    def longestPalindrome(self, s: str) -> str:        
         l = r = 0
         n = len(s)
         for i in range(n):
