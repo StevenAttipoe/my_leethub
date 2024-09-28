@@ -1,12 +1,12 @@
 class Solution:  
     # O(N^2) time
     # O(log n or n) time
-    def threeSum(self, nums: List[int]) -> List[List[int]]:
+    def threeSum2(self, nums: List[int]) -> List[List[int]]:
         n = len(nums)
         nums.sort()
         result = []
 
-        for i in range(n):
+        for i in range(n - 2):
             if i > 0 and nums[i] == nums[i - 1]:
                 continue
                 
@@ -35,16 +35,15 @@ class Solution:
 
     # O(N^2) time
     # O(N) space
-    def threeSum2(self, nums: List[int]) -> List[List[int]]:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
         n = len(nums)
-        nums.sort()
-        result = []
+        result = set()
 
-        for i in range(n):
+        for i in range(n - 2):
             if i > 0 and nums[i] == nums[i - 1]:
                 continue
                 
-            self.twoSum(i, nums, result)
+            self.twoSum2(i, nums, result)
         
         return result
 
@@ -56,7 +55,7 @@ class Solution:
             complement = -(nums[i] + nums[j])
 
             if complement in seen:
-                result.append([nums[i], nums[j], complement])
+                result.add(tuple(sorted((nums[i], nums[j], complement))))
 
                 while j + 1 < len(nums) and nums[j] == nums[j + 1]:
                     j += 1
