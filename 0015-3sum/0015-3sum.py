@@ -1,67 +1,98 @@
 class Solution:  
     # O(N^2) time
+    # O(N) space
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        n = len(nums)
+        result = set()
+        duplicates = set()
+
+        for i in range(n - 2):
+            if nums[i] in duplicates:
+                continue
+
+            seen = set()
+            j = i + 1
+
+            while j < len(nums):
+                complement = -(nums[i] + nums[j])
+
+                if complement in seen:
+                    result.add(tuple(sorted((nums[i], nums[j], complement))))
+
+                    while j + 1 < len(nums) and nums[j] == nums[j + 1]:
+                        j += 1
+                
+                seen.add(nums[j])
+                j += 1
+            
+            duplicates.add(nums[i])
+        
+        return result
+
+    # O(N^2) time
     # O(log n or n) time
     def threeSum2(self, nums: List[int]) -> List[List[int]]:
         n = len(nums)
         nums.sort()
         result = []
 
+        def twoSum(i, nums, result):
+            n = len(nums)
+            j, k = i + 1, n - 1  
+            while j < k:
+                a, b, c = nums[i], nums[j], nums[k]
+                totalSum = a + b + c
+
+                if totalSum == 0:
+                    result.append([a,b,c])
+                    j += 1
+                    k -= 1
+                    while j < k and nums[j] == nums[j - 1]:
+                        j += 1
+
+                elif totalSum > 0:
+                    k -= 1
+                else:
+                    j += 1
+
         for i in range(n - 2):
             if i > 0 and nums[i] == nums[i - 1]:
                 continue
                 
-            self.twoSum(i, nums, result)
+            twoSum(i, nums, result)
         
         return result
-
-    def twoSum(self, i, nums, result):
-        n = len(nums)
-        j, k = i + 1, n - 1  
-        while j < k:
-            a, b, c = nums[i], nums[j], nums[k]
-            totalSum = a + b + c
-
-            if totalSum == 0:
-                result.append([a,b,c])
-                j += 1
-                k -= 1
-                while j < k and nums[j] == nums[j - 1]:
-                    j += 1
-
-            elif totalSum > 0:
-                k -= 1
-            else:
-                j += 1
 
     # O(N^2) time
     # O(N) space
-    def threeSum(self, nums: List[int]) -> List[List[int]]:
+    def threeSum2(self, nums: List[int]) -> List[List[int]]:
         n = len(nums)
-        result = set()
+        nums.sort()
+        result = []
+
+        def twoSum(i, nums, result):
+            seen = set()
+            j = i + 1
+
+            while j < len(nums):
+                complement = -(nums[i] + nums[j])
+
+                if complement in seen:
+                    result.append([nums[i], nums[j], complement])
+
+                    while j + 1 < len(nums) and nums[j] == nums[j + 1]:
+                        j += 1
+                
+                seen.add(nums[j])
+                j += 1
 
         for i in range(n - 2):
             if i > 0 and nums[i] == nums[i - 1]:
                 continue
                 
-            self.twoSum2(i, nums, result)
+            twoSum(i, nums, result)
         
         return result
-
-    def twoSum2(self, i, nums, result):
-        seen = set()
-        j = i + 1
-
-        while j < len(nums):
-            complement = -(nums[i] + nums[j])
-
-            if complement in seen:
-                result.add(tuple(sorted((nums[i], nums[j], complement))))
-
-                while j + 1 < len(nums) and nums[j] == nums[j + 1]:
-                    j += 1
-            
-            seen.add(nums[j])
-            j += 1
 
     # O(N^3) time
     def threeSum3(self, nums: List[int]) -> List[List[int]]:
