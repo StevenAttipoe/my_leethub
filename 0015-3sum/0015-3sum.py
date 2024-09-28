@@ -1,5 +1,5 @@
 class Solution:
-    def threeSum(self, nums: List[int]) -> List[List[int]]:
+    def threeSum2(self, nums: List[int]) -> List[List[int]]:
         n = len(nums)
         nums.sort()
         result = []
@@ -28,17 +28,26 @@ class Solution:
         return result
 
     # O(N^3) time
-    def threeSum2(self, nums: List[int]) -> List[List[int]]:
-        result = set()
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        result = []
         nums.sort()
         n = len(nums)
 
         for i in range(n):
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+
             for j in range(i + 1, n):
+                if j > i + 1 and nums[j] == nums[j - 1]:
+                    continue
+                    
                 for k in range(j + 1, n):
+                    if k > j + 1 and nums[k] == nums[k - 1]:
+                        continue
+
                     if i != j or j != k or i != k:
                         if nums[i] + nums[j] + nums[k] == 0:
-                            result.add((nums[i], nums[j], nums[k]))
+                            result.append((nums[i], nums[j], nums[k]))
 
         return result
         
