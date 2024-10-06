@@ -4,17 +4,18 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
 class Solution:
     def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
-        if not root:
-            return False
-        
-        if not root.left and not root.right and root.val == targetSum:
-            return True
-        
-        targetSum -= root.val
-
-        
-        return self.hasPathSum(root.left, targetSum) or self.hasPathSum(root.right, targetSum)
-                
+        def dfs(node, pathSum) -> bool:
+            if not node:
+                return False
             
+            totalSum = pathSum + node.val
+
+            if (not node.left and not node.right) and totalSum == targetSum:
+                return True
+                
+            return dfs(node.left, totalSum) or dfs(node.right, totalSum)
+        
+        return dfs(root, 0)        
