@@ -1,7 +1,9 @@
 class RandomizedSet:
     def __init__(self):
         self.map = {}
-        self.list = []        
+        self.list = []
+        self.p = 0
+        
 
     def insert(self, val: int) -> bool:
         if val in self.map:
@@ -16,16 +18,16 @@ class RandomizedSet:
             return False
 
         i = self.map.get(val)
-        self.map[self.list[-1]] = i
-        self.list[i], self.list[-1] = self.list[-1], self.list[i]
+        self.map[self.list[self.p]] = i
+        self.list[self.p], self.list[i] = self.list[i], self.list[self.p]
+        self.p += 1
 
-        self.list.pop()
-        self.map.pop(val)
-
+        del self.map[val]
         return True
 
     def getRandom(self) -> int:
-        return random.choice(self.list)
+        randIndex = randint(self.p, len(self.list) - 1)
+        return self.list[randIndex]
         
 
 
