@@ -1,15 +1,23 @@
 class Solution:
+    # O(m * log(n)) time
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         ROWS, COLS = len(matrix), len(matrix[0])
 
         targetRow = None
-        for r in range(ROWS):
-            s, e = matrix[r][0], matrix[r][COLS - 1]
+        l, r = 0, ROWS - 1
+        while l <= r:
+            mid = (r + l) // 2
+            s, e = matrix[mid][0], matrix[mid][COLS - 1]
 
             if s <= target <= e:
-                print(r)
-                targetRow = r
+                targetRow = mid
                 break 
+            
+            elif target < s:
+                r = mid - 1
+
+            elif target > e:
+                l = mid + 1
         
         if targetRow is None:
             return False
@@ -17,7 +25,7 @@ class Solution:
         l, r = 0, COLS - 1
         while l <= r:
             mid = (r + l) // 2
-            
+
             if matrix[targetRow][mid] == target:
                 return True
             
