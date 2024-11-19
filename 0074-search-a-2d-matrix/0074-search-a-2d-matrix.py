@@ -1,39 +1,33 @@
 class Solution:
-    #O(logr + log(c))
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        ROW, COL = len(matrix), len(matrix[0])
+        ROWS, COLS = len(matrix), len(matrix[0])
+
+        targetRow = None
+        for r in range(ROWS):
+            s, e = matrix[r][0], matrix[r][COLS - 1]
+
+            if s <= target <= e:
+                print(r)
+                targetRow = r
+                break 
         
-        midRow = 0
-        top, bot = 0, ROW - 1
-        
-        while top <= bot:
-            midRow = (top + bot) // 2
-            
-            if target > matrix[midRow][-1]:
-                top = midRow + 1
-                
-            elif target < matrix[midRow][0]:
-                bot = midRow - 1
-                
-            else:
-                break
-                
-        #Find if target is not in any of the rows
-        if not top <= bot:
+        if targetRow is None:
             return False
         
-        left, right = 0, COL - 1    
-        while left <= right:
-            mid = (left + right) // 2
+        l, r = 0, COLS - 1
+        while l <= r:
+            mid = (r + l) // 2
             
-            if target < matrix[midRow][mid]:
-                right = mid - 1 
-                
-            elif target > matrix[midRow][mid]:
-                left = mid + 1
-            
-            else:
+            if matrix[targetRow][mid] == target:
                 return True
             
+            elif matrix[targetRow][mid] < target:
+                l = mid + 1
+            
+            else:
+                r = mid - 1
+        
         return False
+            
+            
         
