@@ -1,24 +1,17 @@
 class Solution:
     def combine(self, n: int, k: int) -> List[List[int]]:
-        result = []
-        comb = [0] * k
-        i = 0
+        combinations = []
 
-        while i >= 0:
-            comb[i] += 1
+        def backtrack(start, comb):
+            if k == len(comb):
+                combinations.append(comb[:])
+                return
 
-            if comb[i] > n:
-                i -= 1
-            elif i == k - 1:
-                result.append(comb[:])
-            else:
-                i += 1
-                comb[i] = comb[i - 1]
+            for i in range(start, n + 1):
+                comb.append(i)
+                backtrack(i + 1, comb)
+                comb.pop()
 
-        return result
-            
-
-
-
-
+        backtrack(1, [])
+        return combinations
         
