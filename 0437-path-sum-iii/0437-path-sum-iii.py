@@ -5,32 +5,23 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    paths = 0
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
-        def dfs(node, curSumPath, cache):
+        self.count = 0
+
+        def dfs(node, isStart, pathSum) -> bool:
             if not node:
                 return
+            
+            totalSum = pathSum + node.val
+            if totalSum == targetSum:
+                self.count += 1
+                
+            dfs(node.left, False, totalSum)
+            dfs(node.right, False, totalSum)
 
-            curSumPath += node.val
-            oldPathSum = curSumPath - targetSum
+            if isStart:
+                dfs(node.left, True, 0)
+                dfs(node.right, True, 0)
 
-            self.paths += cache.get(oldPathSum, 0)
-            cache[curSumPath] = cache.get(curSumPath, 0) + 1
-
-            dfs(node.left, curSumPath, cache)
-            dfs(node.right, curSumPath, cache)
-
-            # when move to a different branch, the curSumPath is no longer available
-            cache[curSumPath] -= 1
-
-        cache = {0:1}
-        dfs(root, 0, cache)
-        return self.paths
-
-
-
-
-    
-
-
-        
+        dfs(root, True, 0)
+        return self.count
