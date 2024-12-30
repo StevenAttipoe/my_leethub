@@ -1,28 +1,21 @@
 class Solution:
-    def getKth(self, lo: int, hi: int, k: int) -> int:
-        res = []
-
-        for num in range(lo, hi + 1):
-            res.append([num, self.getSteps(num)])
-
-        res.sort(key= lambda x:x[1])
-
-        return res[k-1][0]
-        
-        
-    def getSteps(self,num, memo = {1:0}):
+    def getPower(self, x):
         steps = 0
-        while (num != 1 and num > 0):
-            old = num
-            if num in memo:
-                num = memo[num]
-                steps += 1
-                continue
-            elif num % 2 == 0:
-                num = num // 2
+
+        while x != 1:
+            if x % 2 == 0:
+                x = x // 2
             else:
-                num = 3 * num + 1
-            memo[old] = num
+                x = 3 * x + 1
             steps += 1
         return steps
+
+    def getKth(self, lo: int, hi: int, k: int) -> int:
+        powerVals = {}
+
+        for i in range(lo, hi + 1):
+            p = self.getPower(i)
+            powerVals[i] = p
+        
+        return sorted(powerVals.keys(), key = lambda x: powerVals[x])[k - 1]
         
