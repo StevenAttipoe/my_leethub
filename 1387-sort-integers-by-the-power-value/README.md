@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/sort-integers-by-the-power-value/">1387. Sort Integers by The Power Value</a></h2><h3>Medium</h3><hr><div><p>The power of an integer <code>x</code> is defined as the number of steps needed to transform <code>x</code> into <code>1</code> using the following steps:</p>
+<h2><a href="https://leetcode.com/problems/sort-integers-by-the-power-value">1387. Sort Integers by The Power Value</a></h2><h3>Medium</h3><hr><p>The power of an integer <code>x</code> is defined as the number of steps needed to transform <code>x</code> into <code>1</code> using the following steps:</p>
 
 <ul>
 	<li>if <code>x</code> is even then <code>x = x / 2</code></li>
@@ -16,7 +16,8 @@
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre><strong>Input:</strong> lo = 12, hi = 15, k = 2
+<pre>
+<strong>Input:</strong> lo = 12, hi = 15, k = 2
 <strong>Output:</strong> 13
 <strong>Explanation:</strong> The power of 12 is 9 (12 --&gt; 6 --&gt; 3 --&gt; 10 --&gt; 5 --&gt; 16 --&gt; 8 --&gt; 4 --&gt; 2 --&gt; 1)
 The power of 13 is 9
@@ -28,7 +29,8 @@ Notice that 12 and 13 have the same power value and we sorted them in ascending 
 
 <p><strong class="example">Example 2:</strong></p>
 
-<pre><strong>Input:</strong> lo = 7, hi = 11, k = 4
+<pre>
+<strong>Input:</strong> lo = 7, hi = 11, k = 4
 <strong>Output:</strong> 7
 <strong>Explanation:</strong> The power array corresponding to the interval [7, 8, 9, 10, 11] is [16, 3, 19, 6, 14].
 The interval sorted by power is [8, 10, 11, 7, 9].
@@ -42,4 +44,3 @@ The fourth number in the sorted array is 7.
 	<li><code>1 &lt;= lo &lt;= hi &lt;= 1000</code></li>
 	<li><code>1 &lt;= k &lt;= hi - lo + 1</code></li>
 </ul>
-</div>
