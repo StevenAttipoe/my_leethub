@@ -1,30 +1,25 @@
 class Solution:
-    def decodeString(self, string: str) -> str:
-        n = 0
+    def decodeString(self, s: str) -> str:
         substr = []
         stack = []
+        digit = 0
 
-        for c in string:
-            if c == "[":
+        for char in s:
+            if char == "[":
                 stack.append("".join(substr))
-                stack.append(n)
+                stack.append(digit)
                 substr.clear()
-                n = 0
+                digit = 0
 
-            elif c == "]":
-                v, p = stack.pop(), stack.pop()
-                substr = [p + (v * "".join(substr))]
+            elif char == "]":
+                freq, prevStr = stack.pop(), stack.pop()
+                substr = [prevStr + (freq * "".join(substr)) ]
 
-            elif c.isalpha():
-                substr.append(c)
-
+            elif char.isdigit():
+                digit = (digit * 10) + int(char)
             else:
-                n = n * 10 + int(c)
+                substr.append(char)
         
         return "".join(substr)
 
-
-
-
-
-            
+        
