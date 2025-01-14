@@ -1,7 +1,7 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
         l, r = 0, len(height) - 1
-        leftMax, rightMax = -1, -1
+        leftMax = rightMax = -1
         totalAmount = 0
 
         while l < r:
@@ -16,7 +16,7 @@ class Solution:
                 r -= 1
         
         return totalAmount
-        
+    
     def trap2(self, height: List[int]) -> int:
         n = len(height)
         totalAmount = 0
@@ -31,11 +31,12 @@ class Solution:
         rightMax[-1] = height[-1]
         for i in range(n - 2, -1, -1):
             rightMax[i] = max(rightMax[i + 1], height[i])
-
+        
         for i in range(n):
             totalAmount += min(leftMax[i], rightMax[i]) - height[i]
         
         return totalAmount
 
 
+        
         
