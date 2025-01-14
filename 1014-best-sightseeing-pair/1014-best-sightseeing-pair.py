@@ -9,4 +9,14 @@ class Solution:
 
         return maxScore
 
+    def maxScoreSightseeingPair2(self, values: List[int]) -> int:
+        maxScore = -math.inf
+
+        for i in range(len(values)):
+            for j in range(i + 1, len(values)):
+                score = values[i] + values[j] + (i - j)
+                maxScore = max(maxScore, score)
+        
+        return maxScore
+
         
