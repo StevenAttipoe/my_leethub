@@ -4,26 +4,26 @@ class Solution:
         ROWS = len(board[0])
         count = 0
 
+
+        def dfs(i, j):
+            if i >= COLS or i < 0 or j >= ROWS or j < 0 or board[i][j] == '.':
+                return
+            
+            board[i][j] = '.'
+            dfs(i + 1, j)
+            dfs(i - 1, j)
+            dfs(i, j + 1)
+            dfs(i, j - 1)
+
         for i in range(COLS):
             for j in range(ROWS):
                 if board[i][j] == 'X':
-                    self.dfs(i, j, board)
+                    dfs(i, j)
                     count += 1
         return count
 
     
-    def dfs(self, i, j, board):
-        COLS = len(board)
-        ROWS = len(board[0])
 
-        if i >= COLS or i < 0 or j >= ROWS or j < 0 or board[i][j] == '.':
-            return
-        
-        board[i][j] = '.'
-        self.dfs(i + 1, j, board)
-        self.dfs(i - 1, j, board)
-        self.dfs(i, j + 1, board)
-        self.dfs(i, j - 1, board)
 
 
 
